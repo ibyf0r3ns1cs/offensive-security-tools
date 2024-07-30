@@ -36,3 +36,65 @@ Open your terminal and run the following command to clone the Terminator reposit
 git clone https://github.com/ZeroMemoryEx/Terminator.git
 cd Terminator
 ```
+### 4. Install Windows 10 SDK (Windows Only)
+Download and install from Windows 10 SDK.
+
+### 5. Configure Build System
+Add a .vscode folder to your project directory.
+
+Create a tasks.json file inside the .vscode folder with the following content:
+
+```json
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build",
+      "type": "shell",
+      "command": "msbuild",
+      "args": [
+        "/property:Configuration=Release",
+        "/property:Platform=x64",
+        "Terminator.sln"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+  ]
+}
+```
+### 6. Add MSBuild to PATH (Windows Only)
+Locate the directory where MSBuild is installed, typically:
+
+```java
+C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin
+```
+
+Add this directory to your system's PATH environment variable.
+Verify the installation by running:
+sh
+Copy code
+msbuild --version
+### 7. Restart VSCode
+Close and reopen Visual Studio Code to ensure all changes take effect.
+
+### 8. Build and Compile Terminator
+Use the following command in the VSCode terminal to build and compile the Terminator project:
+
+sh
+Copy code
+msbuild /property:Configuration=Release /property:Platform=x64 Terminator.sln
+Using Terminator
+After successfully building the project, you can use Terminator to test your organization's EDR in a controlled lab environment.
+
+Important: Always ensure that testing is conducted in a controlled and isolated environment to avoid any potential impact on production systems. The use of such tools should comply with your organization's policies and legal guidelines.
+
+Running Terminator
+Navigate to the output directory (typically Release or x64/Release) where the compiled executable is located. Run the Terminator executable with appropriate permissions and follow the project documentation for specific usage instructions.
+
+Conclusion
+By following these steps, you can set up a development environment in VSCode, build the Terminator project, and use it to test the resilience of your organization's EDR. This setup helps in assessing the effectiveness of your security measures and improving your incident response capabilities.
+
+For more information and advanced usage, refer to the Terminator GitHub repository.
