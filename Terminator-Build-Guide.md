@@ -40,9 +40,8 @@ cd Terminator
 Download and install from [Windows 10 SDK](https://developer.microsoft.com/en-us/windows/downloads/windows-sdk/). 
 
 ### 5. Configure Build System
-Add a `.vscode` folder to your project directory.
-
-Create a `tasks.json` file inside the .vscode folder with the following content:
+1. Add a `.vscode` folder to your project directory.
+2. Create a `tasks.json` file inside the .vscode folder with the following content:
 
 ```json
 {
