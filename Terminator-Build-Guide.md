@@ -43,27 +43,28 @@ Download and install from [Windows 10 SDK](https://developer.microsoft.com/en-us
 1. Add a `.vscode` folder to your project directory.
 2. Create a `tasks.json` file inside the .vscode folder with the following content:
 
-```json
+  ```json
 {
-  "version": "2.0.0",
-  "tasks": [
-    {
-      "label": "build",
-      "type": "shell",
-      "command": "msbuild",
-      "args": [
-        "/property:Configuration=Release",
-        "/property:Platform=x64",
-        "Terminator.sln"
-      ],
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      }
+"version": "2.0.0",
+"tasks": [
+  {
+    "label": "build",
+    "type": "shell",
+    "command": "msbuild",
+    "args": [
+      "/property:Configuration=Release",
+      "/property:Platform=x64",
+      "Terminator.sln"
+    ],
+    "group": {
+      "kind": "build",
+      "isDefault": true
     }
-  ]
+  }
+]
 }
 ```
+
 ### 6. Add MSBuild to PATH (Windows Only)
 Locate the directory where MSBuild is installed, typically:
 
