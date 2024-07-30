@@ -36,8 +36,8 @@ Open your terminal and run the following command to clone the Terminator reposit
 git clone https://github.com/ZeroMemoryEx/Terminator.git
 cd Terminator
 ```
-### 4. Install Windows 10 SDK (Windows Only) https://developer.microsoft.com/en-us/windows/downloads/windows-sdk/ 
-Download and install from Windows 10 SDK.
+### 4. Install Windows 10 SDK (Windows Only) h
+Download and install from [Windows 10 SDK](https://developer.microsoft.com/en-us/windows/downloads/windows-sdk/). 
 
 ### 5. Configure Build System
 Add a .vscode folder to your project directory.
