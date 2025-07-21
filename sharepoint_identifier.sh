@@ -1,7 +1,7 @@
 #!/bin/bash
 
-INPUT="gov_list.txt"
-OUTPUT="sharepoint_detected_gov.csv"
+INPUT="site_list.txt"
+OUTPUT="sharepoint_detected.csv"
 
 echo "domain,detected,version_or_method" > "$OUTPUT"
 
