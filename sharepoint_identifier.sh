@@ -1,15 +1,18 @@
 #!/bin/bash
 
-INPUT="site_list.txt"
-OUTPUT="sharepoint_detected.csv"
+INPUT="gov_list.txt"
+OUTPUT="sharepoint_detected_gov.csv"
 
 echo "domain,detected,version_or_method" > "$OUTPUT"
+
+# Enhanced SharePoint fingerprint pattern
+FINGERPRINT_PATTERN="Microsoft SharePoint|sp.js|MSOWebPartPage|_layouts/15"
 
 while read -r HOST; do
   echo "[*] Scanning $HOST ..."
   URL="https://$HOST"
 
-  # Attempt to detect SharePoint via OPTIONS header
+  # Step 1: Try OPTIONS header for SharePoint version
   VERSION=$(curl -s -I -X OPTIONS --connect-timeout 5 "$URL" \
     | grep -i "^MicrosoftSharePointTeamServices:" \
     | awk '{print $2}' | tr -d '\r')
@@ -20,13 +23,13 @@ while read -r HOST; do
     continue
   fi
 
-  # Fallback: basic HTML fingerprint detection
-  HTML_SIG=$(curl -s --connect-timeout 5 "$URL" \
-    | grep -Eoi "(Microsoft SharePoint|sp.js|MSOWebPartPage|_layouts/15/)" | head -n 1)
+  # Step 2: Fallback to HTML detection with redirect support (-L)
+  HTML_SIG=$(curl -Ls --connect-timeout 5 "$URL" \
+    | grep -Eoi "$FINGERPRINT_PATTERN" | head -n 1)
 
   if [ -n "$HTML_SIG" ]; then
-    echo "[_] $HOST is SharePoint (HTML detected)"
-    echo "$HOST,true,html" >> "$OUTPUT"
+    echo "[_] $HOST is SharePoint (HTML match: $HTML_SIG)"
+    echo "$HOST,true,html:$HTML_SIG" >> "$OUTPUT"
   else
     echo "[_] $HOST is not SharePoint"
     echo "$HOST,false," >> "$OUTPUT"
